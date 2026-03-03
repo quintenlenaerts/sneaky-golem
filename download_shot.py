@@ -28,6 +28,12 @@ BASIC_DIAG_FiLES = {
 }
 
 
+PLASMA_CURRENT_FILES = {
+    "dIp_dt.csv": "Diagnostics/PlasmaDetection/dIp_dt.csv"
+
+}
+
+
 
 
 def download_file(url, save_path):
