@@ -17,6 +17,13 @@ STD_FILES = {
     "R_chamber": "Production/Parameters/SystemParameters/R_chamber"
 }
 
+THINGS = {
+    "t_plasma_start": "Diagnostics/PlasmaDetection/Results/t_plasma_start",
+    "t_plasma_end": "Diagnostics/PlasmaDetection/Results/t_plasma_end",
+    "t_plasma_duration": "Diagnostics/PlasmaDetection/Results/t_plasma_duration",
+    "Ip.csv" : "Diagnostics/BasicDiagnostics/Basic/Results/Bt.csv"
+}
+
 
 
 # http://golem.fjfi.cvut.cz/shots/0/Diagnostics/BasicDiagnostics/analysis.html
@@ -29,7 +36,28 @@ BASIC_DIAG_FiLES = {
 
 
 PLASMA_CURRENT_FILES = {
-    "dIp_dt.csv": "Diagnostics/PlasmaDetection/dIp_dt.csv"
+    # needed for checking if the plasma is actually alive
+    "b_plasma": "Diagnostics/PlasmaDetection/Results/b_plasma",
+    "t_plasma_start": "Diagnostics/PlasmaDetection/Results/t_plasma_start",
+    "t_plasma_end": "Diagnostics/PlasmaDetection/Results/t_plasma_end",
+    "t_plasma_duration": "Diagnostics/PlasmaDetection/Results/t_plasma_duration",
+
+    "t_Bt" : "Production/Parameters/TBt",
+    "t_CD" : "Production/Parameters/Tcd",
+
+    # voltage looop stuff
+    "V_loop.csv" : "Diagnostics/PlasmaDetection/V_loop.csv",
+    "dBt_dt.csv" : "Diagnostics/PlasmaDetection/dBt_dt.csv",
+    "CD_orientation" : "Production/Parameters/CD_orientation", # either CW or anticlock wise
+    "Bt_orientation" : "Production/Parameters/Bt_orientation",
+
+
+    "dIp_dt.csv": "Diagnostics/PlasmaDetection/dIp_dt.csv",
+
+
+    # deze twee hebben we nodig als constants voor chamber current
+    "R_chamber" : "Production/Parameters/SystemParameters/R_chamber",
+    "L_chamber" : "Production/Parameters/SystemParameters/L_chamber"
 
 }
 
@@ -74,4 +102,15 @@ if __name__ == "__main__":
     
 
     shot_number = sys.argv[1]
-    download_shot(files_to_use, shot_number)
+    download_shot(THINGS, shot_number )
+
+# if __name__ == "__main__":
+#     st = 51333
+
+#     for i in range(2000):
+#         shot_no = i + st
+#         download_shot(THINGS, shot_no)
+
+#         shot_dir = f"shot_{shot_no}"
+#         if os.path.isdir(shot_dir) and not os.listdir(shot_dir):
+#             os.rmdir(shot_dir)
