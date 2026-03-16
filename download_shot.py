@@ -45,7 +45,7 @@ PLASMA_CURRENT_FILES = {
     "t_Bt" : "Production/Parameters/TBt",
     "t_CD" : "Production/Parameters/Tcd",
 
-    # voltage looop stuff
+    # voltage looop stuff       
     "V_loop.csv" : "Diagnostics/PlasmaDetection/V_loop.csv",
     "dBt_dt.csv" : "Diagnostics/PlasmaDetection/dBt_dt.csv",
     "CD_orientation" : "Production/Parameters/CD_orientation", # either CW or anticlock wise
@@ -56,6 +56,24 @@ PLASMA_CURRENT_FILES = {
 
 
     # deze twee hebben we nodig als constants voor chamber current
+    "R_chamber" : "Production/Parameters/SystemParameters/R_chamber",
+    "L_chamber" : "Production/Parameters/SystemParameters/L_chamber"
+
+    # #basic diagnostics
+    # "Ip.csv" : "Diagnostics/BasicDiagnostics/Results/Ip.csv",
+    # "Ip.csv" : "Diagnostics/BasicDiagnostics/Results/Ip.csv"
+    
+}
+
+TIME_CONFINEMENT_FILES = {
+    
+    
+    "Ip.csv" : "Diagnostics/BasicDiagnostics/Results/Ip.csv",
+    "Ich.csv" : "Diagnostics/BasicDiagnostics/Results/Ich.csv",
+    "U_loop.csv" : "Diagnostics/BasicDiagnostics/Results/U_loop.csv",
+    "dIpdt.csv" : "Diagnostics/PlasmaDetection/dIp_dt.csv",
+
+    # doing cools 
     "R_chamber" : "Production/Parameters/SystemParameters/R_chamber",
     "L_chamber" : "Production/Parameters/SystemParameters/L_chamber"
 
