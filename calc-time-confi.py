@@ -43,6 +43,9 @@ def calc_time(shot_dir, out_dir="time_results", shot_no=51333):
     #           dan R berekenen
     # 3. time moet gekozen worden door valida_plasma lifetime niet door scuffed mask
     # 4. paper beginne scrhijven (liefst wa rap)
+    # 5. HYDROGEN / HELIUM plasma type
+    # 6. minor radius zou mss wel een bitteke 0.1 kunne zijn
+
     
 
 
