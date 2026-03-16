@@ -64,26 +64,17 @@ def calc_plasma_current(shot_dir, out_dir="last_results", shot_no=2):
     loop_voltage = correct_inf(loop_voltage)
     loop_voltage.loc[:t_CD] = 0
 
-    plot_loop_voltage(loop_voltage,shot_no, t_plasma_start_ms, t_plasma_end_ms, out_dir + "/loop_voltage.png", show=False)
-    plot_loop_voltage(loop_voltage,shot_no, save_path=out_dir + "/loop_voltage_full_range.png", show=False)
+    plot_loop_voltage(loop_voltage,shot_no, t_plasma_start_ms, t_plasma_end_ms, out_dir + "/loop_voltage.png", show=True)
+    plot_loop_voltage(loop_voltage,shot_no, save_path=out_dir + "/loop_voltage_full_range.png", show=True)
 
     # Ait doing some bt things
-
-    # dBt =   shot["dBt_dt.csv"]
-    # polarity_Bt = shot["Bt_orientation"]
-    
-    # if polarity_Bt != 'CW':     
-    #     dBt *= -1  # make positive
-    # dBt = correct_inf(dBt)
-    # dBt -= dBt.loc[offset_sl].mean()
-
     dBt = shot["dBt_dt.csv"]          # DataFrame [t, y]
     if shot["Bt_orientation"] != "CW":
         dBt.iloc[:, 1] *= -1          # only flip signal column
 
     # ax = dBt.plot(grid=True)
     # ax.set(xlabel="Time [s]", ylabel="$dU_{B_t}/dt$ [V]", title="BtCoil_raw signal #{}".format(shot_no))
-    plot_dBt_dt(dBt, save_path=out_dir + "/BTcoil_raw.png")
+    plot_dBt_dt(dBt, save_path=out_dir + "/BTcoil_raw.png", show = True)
 
 
 

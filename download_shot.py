@@ -102,7 +102,7 @@ if __name__ == "__main__":
     
 
     shot_number = sys.argv[1]
-    download_shot(THINGS, shot_number )
+    download_shot(STD_FILES, shot_number )
 
 # if __name__ == "__main__":
 #     st = 51333
