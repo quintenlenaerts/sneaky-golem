@@ -67,7 +67,12 @@ PLASMA_CURRENT_FILES = {
 
 TIME_CONFINEMENT_FILES = {
     
-    
+    # For plasma validation
+    "b_plasma": "Diagnostics/PlasmaDetection/Results/b_plasma",
+    "t_plasma_start": "Diagnostics/PlasmaDetection/Results/t_plasma_start",
+    "t_plasma_end": "Diagnostics/PlasmaDetection/Results/t_plasma_end",
+    "t_plasma_duration": "Diagnostics/PlasmaDetection/Results/t_plasma_duration",
+
     "Ip.csv" : "Diagnostics/BasicDiagnostics/Results/Ip.csv",
     "Ich.csv" : "Diagnostics/BasicDiagnostics/Results/Ich.csv",
     "U_loop.csv" : "Diagnostics/BasicDiagnostics/Results/U_loop.csv",

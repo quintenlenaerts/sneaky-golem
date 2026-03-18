@@ -8,6 +8,8 @@ from scipy import constants
 
 import matplotlib.pyplot as plt
 
+from validate_plasma import validate_plasma
+
 MAJOR_RADIUS = 0.4
 MINOR_RADIUS = 0.085
 VOLUME = 2 * np.pi ** 2 * MAJOR_RADIUS * MINOR_RADIUS ** 2
@@ -25,7 +27,18 @@ plt.rcParams.update({
     "axes.linewidth": 1.2,
 })
 
-def calc_time(shot_dir, out_dir="time_results", shot_no=51333):
+
+
+def calc_timeconf(shot_dir, out_dir="time_results"):
+    os.makedirs(out_dir, exist_ok=True)
+    shot = ShotData(shot_dir)
+
+    # 1. check if plasma succesfull & extract workable range 
+    # 2.
+
+
+
+def calc_time(shot_dir, out_dir="time_results"):
     os.makedirs(out_dir, exist_ok=True)
 
     shot = ShotData(shot_dir)
@@ -60,10 +73,13 @@ def calc_time(shot_dir, out_dir="time_results", shot_no=51333):
     Te = 0.9 * Rp ** (-2/3)
 
     time_valid = time[mask]
+    print(time_valid)
 
 
-    n_e = calc_density(shot)
+    n_e = calc_density(shot, HELIUM_GAS)
     
+    # om te zien waar het plasma leeft enzo
+    validate_plasma(shot)
 
     time_conf = constants.elementary_charge * n_e * Te * VOLUME / (3 * Uloop[mask] * Ip[mask])
 
@@ -83,8 +99,9 @@ def calc_time(shot_dir, out_dir="time_results", shot_no=51333):
     # T_e = 0.9 * Rp ** (-2/3)
 
     fig, ax = plt.subplots(figsize=(8.6, 5.6), dpi=160)
-    # ax.plot(time, Ip, lw=1.1, color = tue_red, label="Ip")
-    ax.plot(time_valid, time_conf, lw=1.1, color = tue_red, label="energy conf")
+    ax.plot(time, Ip, lw=1.1, color = tue_red, label="Ip")
+    # ax.plot(time_valid, time_conf, lw=1.1, color = tue_red, label="energy conf")
+
     # ax.plot(time_valid, Te, lw=1.1, color = tue_red, label="temperature")
     # ax.plot(time, dIpdt*-1, lw=1.1, color = red_compl, label="dIp")
     # ax.plot(time, Uloop, lw=1.1, color = red_compl, label="Uloop")
@@ -130,8 +147,28 @@ def calc_density(shot, working_gas=HELIUM_GAS):
     return N_e / VOLUME
 
 
+def handle_shot_download():
+    # standard shot is 51333
+    num = 51333
+
+    # shot num is first argu
+    if (len(sys.argv) > 1):
+        num = sys.argv[1]
+    
+    should_download_shot = True
+    if (len(sys.argv)>2):
+        should_download_shot = sys.argv[2] == "1"
+
+    print(f"[X] calculating time conf of shot num {num} \t downloading : {should_download_shot} ")
+
+    if (should_download_shot):
+        ds.download_shot(ds.TIME_CONFINEMENT_FILES, num)
+
+    return num
+
+
 if __name__ == "__main__":
-    num = 51333 #ieuw
+    # num = 51333 #ieuw
     # num = 48251 # guce 
     # num = 41881
     
@@ -139,7 +176,5 @@ if __name__ == "__main__":
     # num = 44805 # tres bien
     # num = 44779
     # num = 44805
-
-
-    ds.download_shot(ds.TIME_CONFINEMENT_FILES, num)
-    calc_time(f"shot_{num}", shot_no=num)
+    num = handle_shot_download()
+    calc_time(f"shot_{num}")
