@@ -19,6 +19,8 @@ VOLUME = 2 * np.pi ** 2 * MAJOR_RADIUS * MINOR_RADIUS ** 2
 # COMPUTATION OPTIONS
 TIME_MASK_PADDING = 0.05
 DO_PLOTS = True
+DRIFT_CORRECTION = True
+
 # WORKING GAS OPTIONS
 HELIUM_GAS = 0
 HYDROGEN_GAS = 1
@@ -49,7 +51,8 @@ def calc_timeconf(shot_dir, out_dir="time_results"):
     drift = fullDrift[time_mask]
 
     # Remove drift
-    Ip = Ip - drift
+    if DRIFT_CORRECTION:
+        Ip = Ip - drift
     quick_plot(time, Ip, "Ip [A]")
 
     # 3. calculating the R
