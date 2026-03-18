@@ -8,7 +8,9 @@ from scipy import constants
 
 import matplotlib.pyplot as plt
 
-from validate_plasma import validate_plasma
+from validate_plasma import validate_plasma, get_plasma_start_and_end_indices
+
+from golem import *
 
 MAJOR_RADIUS = 0.4
 MINOR_RADIUS = 0.085
@@ -34,7 +36,13 @@ def calc_timeconf(shot_dir, out_dir="time_results"):
     shot = ShotData(shot_dir)
 
     # 1. check if plasma succesfull & extract workable range 
-    # 2.
+    p_valid, p_start, p_end = validate_plasma(shot)
+    if not p_valid:
+        gprint("Plasma not valid. Aborting.")
+        return
+    time = shot["U_loop.csv"].iloc[:,0]
+
+    # 2. 
 
 
 
@@ -159,7 +167,7 @@ def handle_shot_download():
     if (len(sys.argv)>2):
         should_download_shot = sys.argv[2] == "1"
 
-    print(f"[X] calculating time conf of shot num {num} \t downloading : {should_download_shot} ")
+    gprint(f"calculating time conf of shot num {num} \t downloading : {should_download_shot} ")
 
     if (should_download_shot):
         ds.download_shot(ds.TIME_CONFINEMENT_FILES, num)
@@ -171,10 +179,11 @@ if __name__ == "__main__":
     # num = 51333 #ieuw
     # num = 48251 # guce 
     # num = 41881
-    
     # num = 44824 # guci
     # num = 44805 # tres bien
     # num = 44779
     # num = 44805
+
+    gstart_large()
     num = handle_shot_download()
     calc_time(f"shot_{num}")
