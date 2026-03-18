@@ -23,7 +23,7 @@ DO_PLOTS = True
 HELIUM_GAS = 0
 HYDROGEN_GAS = 1
 
-def calc_timeconf(shot_dir, out_dir="time_results", shot_num=""):
+def calc_timeconf(shot_dir, out_dir="time_results"):
     os.makedirs(out_dir, exist_ok=True)
     shot = ShotData(shot_dir)
 
@@ -34,6 +34,10 @@ def calc_timeconf(shot_dir, out_dir="time_results", shot_num=""):
         return
     
     time = shot["U_loop.csv"].iloc[:,0]
+    
+    fullIp = (shot["Ip.csv"].iloc[:,1] * 1e3)
+    fullDrift = (fullIp[len(fullIp)-1] - fullIp[0])/(time[len(time)-1] - time[0]) * time  
+
     s_idx, e_idx = get_plasma_start_and_end_indices(p_start, p_end, time, TIME_MASK_PADDING)
     gprint(f"Time analysis found start/end indices : {s_idx}/{e_idx} and time values are {round(time[s_idx], 3)}/{round(time[e_idx],3)} ms. These values should match the above (minus padding). \n")
     time_mask = (np.arange(len(time)) >= s_idx) & (np.arange(len(time)) <= e_idx)
@@ -42,6 +46,11 @@ def calc_timeconf(shot_dir, out_dir="time_results", shot_num=""):
     # 2. Defining / Getting variables
     Ip = (shot["Ip.csv"].iloc[time_mask,1] * 1e3)
     Uloop = (shot["U_loop.csv"].iloc[time_mask,1])
+    drift = fullDrift[time_mask]
+
+    # Remove drift
+    Ip = Ip - drift
+    quick_plot(time, Ip, "Ip [A]")
 
     # 3. calculating the R
     Rp = Uloop / Ip 
@@ -144,6 +153,6 @@ if __name__ == "__main__":
 
     num = handle_shot_download()
 
-    calc_timeconf(f"shot_{num}", num)
+    calc_timeconf(f"shot_{num}")
 
     gend()
