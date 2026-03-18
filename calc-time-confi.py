@@ -23,19 +23,6 @@ DO_PLOTS = True
 HELIUM_GAS = 0
 HYDROGEN_GAS = 1
 
-
-
-tue_red = "#C71918"
-red_compl = "#18C6C7"
-
-plt.rcParams.update({
-    "font.family": "serif",
-    "mathtext.fontset": "stix",
-    "axes.linewidth": 1.2,
-})
-
-
-
 def calc_timeconf(shot_dir, out_dir="time_results", shot_num=""):
     os.makedirs(out_dir, exist_ok=True)
     shot = ShotData(shot_dir)
@@ -78,6 +65,15 @@ def calc_timeconf(shot_dir, out_dir="time_results", shot_num=""):
 
 
 
+tue_red = "#C71918"
+red_compl = "#18C6C7"
+
+plt.rcParams.update({
+    "font.family": "serif",
+    "mathtext.fontset": "stix",
+    "axes.linewidth": 1.2,
+})
+
 def quick_plot(t_ax, val, label):
     if not DO_PLOTS:
         return
@@ -89,85 +85,6 @@ def quick_plot(t_ax, val, label):
 
 
 
-
-def calc_time(shot_dir, out_dir="time_results"):
-    os.makedirs(out_dir, exist_ok=True)
-
-    shot = ShotData(shot_dir)
-    L_p = calc_electron_inductance() + calc_ion_inductance()
-
-
-    #
-    #   TODO LIST : (TESSSA asgiend) 
-    #
-
-    # 1. Oke hier moet eerst worden gececked ofda dIdpt uberhaupt beschickbaar was
-    #           => dit veranderd hoe we PH kunne/moete berekenen
-    # 2. vervolgens moet de effective/workable range van het plasma bepaald worde door Ip
-    #           overal waar deez klein / negatief is => weg 
-    #           dan R berekenen
-    # 3. time moet gekozen worden door valida_plasma lifetime niet door scuffed mask
-    # 4. paper beginne scrhijven (liefst wa rap)
-    # 5. HYDROGEN / HELIUM plasma type
-    # 6. minor radius zou mss wel een bitteke 0.1 kunne zijn
-
-    
-
-
-    Ip = shot["Ip.csv"].iloc[:,1] * 1e3
-    time = shot["Ip.csv"].iloc[:,0]
-    # dIpdt = shot["dIpdt.csv"].iloc[:,1]
-    Uloop = shot["U_loop.csv"].iloc[:,1]
-    
-    mask = Ip > 0.5 * np.max(Ip)
-
-    Rp = Uloop[mask] / Ip[mask]
-    Te = 0.9 * Rp ** (-2/3)
-
-    time_valid = time[mask]
-    print(time_valid)
-
-
-    n_e = calc_density(shot, HELIUM_GAS)
-    
-    # om te zien waar het plasma leeft enzo
-    validate_plasma(shot)
-
-    time_conf = constants.elementary_charge * n_e * Te * VOLUME / (3 * Uloop[mask] * Ip[mask])
-
-
-    # Rp = Uloop / Ip
-
-    # print("\nRp")
-    # print(Rp)
-
-    # print(L_p)
-    # BIG METHOD IF DIPDT IS GIVEN
-    # P_mag = L_p * Ip * dIpdt
-    # P_H = Uloop * Ip - P_mag
-    # POOR PERSON METHODS
-    # P_H = Uloop * Ip
-
-    # T_e = 0.9 * Rp ** (-2/3)
-
-    fig, ax = plt.subplots(figsize=(8.6, 5.6), dpi=160)
-    ax.plot(time, Ip, lw=1.1, color = tue_red, label="Ip")
-    # ax.plot(time_valid, time_conf, lw=1.1, color = tue_red, label="energy conf")
-
-    # ax.plot(time_valid, Te, lw=1.1, color = tue_red, label="temperature")
-    # ax.plot(time, dIpdt*-1, lw=1.1, color = red_compl, label="dIp")
-    # ax.plot(time, Uloop, lw=1.1, color = red_compl, label="Uloop")
-    # ax.plot(time, Rp)
-    # ax.plot(time, Uloop, lw=1)
-    # ax.plot(time, Uloop, lw=1)
-    ax.legend()
-    plt.show()
-
-
-    
-    # print(calc_density(shot))
-
-
 def calc_electron_inductance():
     return constants.mu_0 * MAJOR_RADIUS * np.log(8 * MAJOR_RADIUS / MINOR_RADIUS - 7/2)
 
@@ -175,7 +92,6 @@ def calc_ion_inductance():
     nu = 2 # the peaking factor : assumeing 1 for parabolic or 2 for peaked (more likely to accurately represnet thre reeal worls )
     norm_internal_inductance = np.log(1.65 + 0.89 * nu)
     return constants.mu_0 * MAJOR_RADIUS * norm_internal_inductance / 2 
-
 
 def calc_density(shot, working_gas=HELIUM_GAS):
     #eerst dichtheid van working gas bepalen
@@ -197,7 +113,6 @@ def calc_density(shot, working_gas=HELIUM_GAS):
     N_e = k_a * k_e * (p0 * V0) / (T0 * constants.k)
 
     return N_e / VOLUME
-
 
 def handle_shot_download():
     # standard shot is 51333
@@ -228,7 +143,7 @@ if __name__ == "__main__":
     handle_should_plot_arg()
 
     num = handle_shot_download()
-    
+
     calc_timeconf(f"shot_{num}", num)
 
     gend()
