@@ -6,18 +6,17 @@ import numpy as np
 from scipy import constants
 
 
-import matplotlib.pyplot as plt
-
 from validate_plasma import validate_plasma, get_plasma_start_and_end_indices
 
 from golem import *
+from export_meta import quick_plot, write_timeconf_meta
 
 MAJOR_RADIUS = 0.4
 MINOR_RADIUS = 0.085
 VOLUME = 2 * np.pi ** 2 * MAJOR_RADIUS * MINOR_RADIUS ** 2
 
 # COMPUTATION OPTIONS
-TIME_MASK_PADDING = 0.05
+TIME_MASK_PADDING = 0.12
 DO_PLOTS = True
 DRIFT_CORRECTION = True
 
@@ -53,16 +52,16 @@ def calc_timeconf(shot_dir, out_dir="time_results"):
     # Remove drift
     if DRIFT_CORRECTION:
         Ip = Ip - drift
-    quick_plot(time, Ip, "Ip [A]")
+    quick_plot(DO_PLOTS,time, Ip, "Ip", ylabel="Ip [A]", out_path=f"{out_dir}/Ip.png")
 
     # 3. calculating the R
     Rp = Uloop / Ip 
-    quick_plot(time, Rp, "Rp [ohm]")
-    quick_plot(time, Uloop, "Uloop [V]")
+    quick_plot(DO_PLOTS,time, Rp, "Rp", ylabel="Rp [ohm]", out_path=f"{out_dir}/Rp.png")
+    quick_plot(DO_PLOTS,time, Uloop, "U Loop", ylabel="U [V]", out_path=f"{out_dir}/Uloop.png")
 
     # 4. Calculating temperatuur
     Te = 0.9 * Rp ** (-2/3)
-    quick_plot(time, Te, "Temperature [ev]")
+    quick_plot(DO_PLOTS,time, Te, "Temperature", ylabel="Temperature [eV]", out_path=f"{out_dir}/T.png")
     gprint(f"Average/Mean plasma temperatue {round(np.average(Te),2)}/{round(np.mean(Te),2)} [eV]\n")
 
     # 5. Calculating density.
@@ -71,30 +70,35 @@ def calc_timeconf(shot_dir, out_dir="time_results"):
 
     # 6. Calculating time conf
     time_conf = constants.elementary_charge * n_e * Te * VOLUME / (3 * Uloop * Ip) *1e6
-    quick_plot(time, time_conf, "Time confinement. [µs]")
+    quick_plot(DO_PLOTS,time, time_conf, "Time confinement. [µs]")
     rounding = 2
     gprint(f"Time confinement min/max/avg/mean : {round(np.min(time_conf),rounding)}/{round(np.max(time_conf),rounding)}/{round(np.average(time_conf),rounding)}/{round(np.mean(time_conf),rounding)} [µs]")
 
-
-
-tue_red = "#C71918"
-red_compl = "#18C6C7"
-
-plt.rcParams.update({
-    "font.family": "serif",
-    "mathtext.fontset": "stix",
-    "axes.linewidth": 1.2,
-})
-
-def quick_plot(t_ax, val, label):
-    if not DO_PLOTS:
-        return
-    fig, ax = plt.subplots(figsize=(8.6, 5.6), dpi=160)
-    ax.plot(t_ax, val, label=label, color=tue_red, lw=1.1)
-    ax.legend()
-    plt.show()
-    plt.close()
-
+    # exporting data
+    write_timeconf_meta(
+        out_dir=out_dir,
+        shot_dir=shot_dir,
+        shot_num=shot_dir.replace("shot_", ""),
+        working_gas=HELIUM_GAS,
+        time_mask_padding=TIME_MASK_PADDING,
+        drift_correction=DRIFT_CORRECTION,
+        do_plots=DO_PLOTS,
+        major_radius=MAJOR_RADIUS,
+        minor_radius=MINOR_RADIUS,
+        volume=VOLUME,
+        plasma_valid=p_valid,
+        start_idx=s_idx,
+        end_idx=e_idx,
+        start_time=time.iloc[0] if hasattr(time, "iloc") else time[0],
+        end_time=time.iloc[-1] if hasattr(time, "iloc") else time[-1],
+        time=time,
+        Ip=Ip,
+        Uloop=Uloop,
+        Rp=Rp,
+        Te=Te,
+        tau_E=time_conf,
+        n_e=n_e,
+    )
 
 
 def calc_electron_inductance():
@@ -156,6 +160,6 @@ if __name__ == "__main__":
 
     num = handle_shot_download()
 
-    calc_timeconf(f"shot_{num}")
+    calc_timeconf(f"shot_{num}", out_dir=f"time_results_{num}")
 
     gend()

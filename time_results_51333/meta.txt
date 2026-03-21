@@ -1,0 +1,72 @@
+==== SETTINGS ====
+shot_num: 51333
+shot_dir: shot_51333
+out_dir: time_results_51333
+working_gas: helium
+working_gas_code: 0
+time_mask_padding: 0.120000
+drift_correction: True
+do_plots: False
+
+==== DETECTED PLASMA WINDOW ====
+valid_plasma: True
+start_index: 2018
+end_index: 6085
+start_time_ms: 1.219404
+end_time_ms: 5.286404
+window_duration_ms: 4.067000
+
+==== CONSTANTS ====
+major_radius_m: 0.400000
+minor_radius_m: 0.085000
+volume_m3: 0.057046
+
+==== RESULTS ====
+density_m^-3: 1.010653e+19
+
+-- time [ms] --
+time_min_ms: 1.219404
+time_max_ms: 5.286404
+time_avg_ms: 3.252904
+time_mean_ms: 3.252904
+time_std_ms: 1.174330
+
+-- Ip [A] --
+Ip_min_A: 9.703146
+Ip_max_A: 218.233408
+Ip_avg_A: 158.102097
+Ip_mean_A: 158.102097
+Ip_std_A: 49.553996
+
+-- Uloop [V] --
+Uloop_min_V: 2.559375
+Uloop_max_V: 12.398438
+Uloop_avg_V: 9.556472
+Uloop_mean_V: 9.556472
+Uloop_std_V: 2.530210
+
+-- Rp [ohm] --
+Rp_min_ohm: 0.053910
+Rp_max_ohm: 0.265136
+Rp_avg_ohm: 0.062950
+Rp_mean_ohm: 0.062950
+Rp_std_ohm: 0.012564
+
+-- Te [eV] --
+Te_min_eV: 2.180702
+Te_max_eV: 6.306633
+Te_avg_eV: 5.751328
+Te_mean_eV: 5.751328
+Te_std_eV: 0.435568
+
+-- tau_E [us] --
+tauE_min_us: 71.275279
+tauE_max_us: 2689.806127
+tauE_avg_us: 201.104920
+tauE_mean_us: 201.104920
+tauE_std_us: 302.559515
+
+==== LATEX ====
+density: $n_e = 1.011 \times 10^{19}\,\mathrm{m^{-3}}$
+temperature: $T_e = 5.751\,\mathrm{eV}$
+time_confinement: $\tau_E = 201.105\,\mathrm{\mu s}$
