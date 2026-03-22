@@ -1,6 +1,6 @@
 
 
-    TODO LIST : (TESSSA asgiend) 
+    TODO LIST :
 
 
 1. Oke hier moet eerst worden gececked ofda dIdpt uberhaupt beschickbaar was

@@ -6,7 +6,7 @@ working_gas: helium
 working_gas_code: 0
 time_mask_padding: 0.120000
 drift_correction: True
-do_plots: False
+do_plots: True
 
 ==== DETECTED PLASMA WINDOW ====
 valid_plasma: True
@@ -22,7 +22,17 @@ minor_radius_m: 0.085000
 volume_m3: 0.057046
 
 ==== RESULTS ====
-density_m^-3: 1.010653e+19
+density_m^-3: 5.053267e+18
+
+==== SUMMARY TABLE ====
+quantity               min             max            mean             avg
+----------------------------------------------------------------------------
+Ip [A]            9.703146      218.233408      158.102097      158.102097
+Uloop [V]         2.559375       12.398438        9.556472        9.556472
+Te [eV]           2.180702        6.306633        5.751328        5.751328
+tau_E [us]       35.637639     1344.903064      100.552460      100.552460
+
+-- time [ms] --
 
 -- time [ms] --
 time_min_ms: 1.219404
@@ -60,13 +70,29 @@ Te_mean_eV: 5.751328
 Te_std_eV: 0.435568
 
 -- tau_E [us] --
-tauE_min_us: 71.275279
-tauE_max_us: 2689.806127
-tauE_avg_us: 201.104920
-tauE_mean_us: 201.104920
-tauE_std_us: 302.559515
+tauE_min_us: 35.637639
+tauE_max_us: 1344.903064
+tauE_avg_us: 100.552460
+tauE_mean_us: 100.552460
+tauE_std_us: 151.279758
 
 ==== LATEX ====
-density: $n_e = 1.011 \times 10^{19}\,\mathrm{m^{-3}}$
+density: $n_e = 5.053 \times 10^{18}\,\mathrm{m^{-3}}$
 temperature: $T_e = 5.751\,\mathrm{eV}$
-time_confinement: $\tau_E = 201.105\,\mathrm{\mu s}$
+time_confinement: $\tau_E = 100.552\,\mathrm{\mu s}$
+
+latex_table:
+\begin{table}[h]
+\centering
+\begin{tabular}{lcccc}
+\hline
+Quantity & Min & Max & Mean & Avg \\
+\hline
+$I_p$ [A] & 9.703146 & 218.233408 & 158.102097 & 158.102097 \\
+$U_{loop}$ [V] & 2.559375 & 12.398438 & 9.556472 & 9.556472 \\
+$T_e$ [eV] & 2.180702 & 6.306633 & 5.751328 & 5.751328 \\
+$\tau_E$ [$\mu$s] & 35.637639 & 1344.903064 & 100.552460 & 100.552460 \\
+\hline
+\end{tabular}
+\caption{Summary of plasma parameters}
+\end{table}

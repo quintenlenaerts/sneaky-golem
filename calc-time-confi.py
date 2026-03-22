@@ -60,7 +60,15 @@ def calc_timeconf(shot_dir, out_dir="time_results"):
     quick_plot(DO_PLOTS,time, Uloop, "U Loop", ylabel="U [V]", out_path=f"{out_dir}/Uloop.png")
 
     # 4. Calculating temperatuur
-    Te = 0.9 * Rp ** (-2/3)
+    #Te = 0.9 * Rp ** (-2/3)
+    A = np.pi * MINOR_RADIUS**2
+    L = 2 * np.pi * MAJOR_RADIUS
+    lnLambda = 10 # not sure, vgm is dat voor iter
+    Z = 2 # place holder value
+    eta = Rp * A / L
+
+    Te_K = (4 * np.sqrt(2 * np.pi)* Z* const.e**2* np.sqrt(const.m_e)* lnLambda 
+    / ( 3*(4 * np.pi * const.epsilon_0)**2* eta* const.k**1.5))**(2/3)
     quick_plot(DO_PLOTS,time, Te, "Temperature", ylabel="Temperature [eV]", out_path=f"{out_dir}/T.png")
     gprint(f"Average/Mean plasma temperatue {round(np.average(Te),2)}/{round(np.mean(Te),2)} [eV]\n")
 
