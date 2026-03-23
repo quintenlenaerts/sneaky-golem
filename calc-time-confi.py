@@ -63,8 +63,11 @@ def calc_timeconf(shot_dir, out_dir="time_results"):
     #Te = 0.9 * Rp ** (-2/3)
     A = np.pi * MINOR_RADIUS**2
     L = 2 * np.pi * MAJOR_RADIUS
-    lnLambda = 10 # not sure, vgm is dat voor iter
-    Z = 2 # place holder value
+    lnLambda = 10 # Estimate
+    Z = 1 # Hydrogen
+    if (working_gas == HELIUM_GAS):
+        Z = 2 # place holder value
+        
     eta = Rp * A / L
 
     Te = (4 * np.sqrt(2 * np.pi)* Z* constants.elementary_charge**2* np.sqrt(constants.electron_mass)* lnLambda 
