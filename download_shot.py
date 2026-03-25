@@ -73,19 +73,38 @@ TIME_CONFINEMENT_FILES = {
     "t_plasma_end": "Diagnostics/PlasmaDetection/Results/t_plasma_end",
     "t_plasma_duration": "Diagnostics/PlasmaDetection/Results/t_plasma_duration",
 
+    # "U_loop_2.csv" : "DASs/TektrMSO56Standard/loop_voltage.csv",
+
     "Ip.csv" : "Diagnostics/BasicDiagnostics/Results/Ip.csv",
-    "Ich.csv" : "Diagnostics/BasicDiagnostics/Results/Ich.csv",
+    # "Ich.csv" : "Diagnostics/BasicDiagnostics/Results/Ich.csv",
     "U_loop.csv" : "Diagnostics/BasicDiagnostics/Results/U_loop.csv",
-    "dIpdt.csv" : "Diagnostics/PlasmaDetection/dIp_dt.csv",
+    # "dIpdt.csv" : "Diagnostics/PlasmaDetection/dIp_dt.csv",
 
     # doing cools 
-    "R_chamber" : "Production/Parameters/SystemParameters/R_chamber",
-    "L_chamber" : "Production/Parameters/SystemParameters/L_chamber",
+    # "R_chamber" : "Production/Parameters/SystemParameters/R_chamber",
+    # "L_chamber" : "Production/Parameters/SystemParameters/L_chamber",
 
 
     # chamber params
     "pre_dis_p" : "Operation/Discharge/p_chamber_pressure_predischarge"
 
+}
+
+PLASMA_CURRENT_2_FILES = {
+    "b_plasma": "Diagnostics/PlasmaDetection/Results/b_plasma",
+    "t_plasma_start": "Diagnostics/PlasmaDetection/Results/t_plasma_start",
+    "t_plasma_end": "Diagnostics/PlasmaDetection/Results/t_plasma_end",
+    "t_plasma_duration": "Diagnostics/PlasmaDetection/Results/t_plasma_duration",
+
+    "t_Bt": "Production/Parameters/TBt",
+    "t_CD": "Production/Parameters/Tcd",
+    
+    "V_loop.csv": "Diagnostics/PlasmaDetection/V_loop.csv",
+    "dIp_dt.csv": "Diagnostics/PlasmaDetection/dIp_dt.csv",
+    "CD_orientation": "Production/Parameters/CD_orientation",
+    "K_RogowskiCoil": "Production/Parameters/SystemParameters/K_RogowskiCoil",
+    "R_chamber": "Production/Parameters/SystemParameters/R_chamber",
+    "L_chamber": "Production/Parameters/SystemParameters/L_chamber",
 }
 
 

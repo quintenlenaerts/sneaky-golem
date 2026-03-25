@@ -29,8 +29,8 @@ quantity               min             max            mean             avg
 ----------------------------------------------------------------------------
 Ip [A]            9.703146      218.233408      158.102097      158.102097
 Uloop [V]         2.559375       12.398438        9.556472        9.556472
-Te [eV]        6618.453453    1.914069e+04    1.745534e+04    1.745534e+04
-tau_E [us]    1.081606e+05    4.081794e+06    3.051777e+05    3.051777e+05
+Te [eV]           2.180702        6.306633        5.751328        5.751328
+tau_E [us]       35.637639     1344.903064      100.552460      100.552460
 
 -- time [ms] --
 
@@ -63,23 +63,23 @@ Rp_mean_ohm: 0.062950
 Rp_std_ohm: 0.012564
 
 -- Te [eV] --
-Te_min_eV: 6618.453453
-Te_max_eV: 1.914069e+04
-Te_avg_eV: 1.745534e+04
-Te_mean_eV: 1.745534e+04
-Te_std_eV: 1321.951859
+Te_min_eV: 2.180702
+Te_max_eV: 6.306633
+Te_avg_eV: 5.751328
+Te_mean_eV: 5.751328
+Te_std_eV: 0.435568
 
 -- tau_E [us] --
-tauE_min_us: 1.081606e+05
-tauE_max_us: 4.081794e+06
-tauE_avg_us: 3.051777e+05
-tauE_mean_us: 3.051777e+05
-tauE_std_us: 4.591356e+05
+tauE_min_us: 35.637639
+tauE_max_us: 1344.903064
+tauE_avg_us: 100.552460
+tauE_mean_us: 100.552460
+tauE_std_us: 151.279758
 
 ==== LATEX ====
 density: $n_e = 5.053 \times 10^{18}\,\mathrm{m^{-3}}$
-temperature: $T_e = 1.746 \times 10^{4}\,\mathrm{eV}$
-time_confinement: $\tau_E = 3.052 \times 10^{5}\,\mathrm{\mu s}$
+temperature: $T_e = 5.751\,\mathrm{eV}$
+time_confinement: $\tau_E = 100.552\,\mathrm{\mu s}$
 
 latex_table:
 \begin{table}[h]
@@ -90,8 +90,8 @@ Quantity & Min & Max & Mean & Avg \\
 \hline
 $I_p$ [A] & 9.703146 & 218.233408 & 158.102097 & 158.102097 \\
 $U_{loop}$ [V] & 2.559375 & 12.398438 & 9.556472 & 9.556472 \\
-$T_e$ [eV] & 6618.453453 & 1.914069e+04 & 1.745534e+04 & 1.745534e+04 \\
-$\tau_E$ [$\mu$s] & 1.081606e+05 & 4.081794e+06 & 3.051777e+05 & 3.051777e+05 \\
+$T_e$ [eV] & 2.180702 & 6.306633 & 5.751328 & 5.751328 \\
+$\tau_E$ [$\mu$s] & 35.637639 & 1344.903064 & 100.552460 & 100.552460 \\
 \hline
 \end{tabular}
 \caption{Summary of plasma parameters}

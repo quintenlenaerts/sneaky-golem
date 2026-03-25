@@ -36,7 +36,8 @@ def calc_timeconf(shot_dir, out_dir="time_results"):
     
     time = shot["U_loop.csv"].iloc[:,0]
     
-    fullIp = (shot["Ip.csv"].iloc[:,1] * 1e3)
+    # fullIp = (shot["Ip.csv"].iloc[:,1] )          # using calc ip
+    fullIp = (shot["Ip.csv"].iloc[:,1] * 1e3)       # using std ip
     fullDrift = (fullIp[len(fullIp)-1] - fullIp[0])/(time[len(time)-1] - time[0]) * time  
 
     s_idx, e_idx = get_plasma_start_and_end_indices(p_start, p_end, time, TIME_MASK_PADDING)
@@ -45,7 +46,8 @@ def calc_timeconf(shot_dir, out_dir="time_results"):
     time = time[time_mask]
 
     # 2. Defining / Getting variables
-    Ip = (shot["Ip.csv"].iloc[time_mask,1] * 1e3)
+    # Ip = (shot["Ip.csv"].iloc[time_mask,1])         # FOR USING calculated IP
+    Ip = (shot["Ip.csv"].iloc[time_mask,1] * 1e3) # FOR USING THE std IP
     Uloop = (shot["U_loop.csv"].iloc[time_mask,1])
     drift = fullDrift[time_mask]
 
@@ -60,18 +62,18 @@ def calc_timeconf(shot_dir, out_dir="time_results"):
     quick_plot(DO_PLOTS,time, Uloop, "U Loop", ylabel="U [V]", out_path=f"{out_dir}/Uloop.png")
 
     # 4. Calculating temperatuur
-    #Te = 0.9 * Rp ** (-2/3)
-    A = np.pi * MINOR_RADIUS**2
-    L = 2 * np.pi * MAJOR_RADIUS
-    lnLambda = 10 # Estimate
-    Z = 1 # Hydrogen
-    # if (working_gas == HELIUM_GAS):
-    #     Z = 2 # place holder value
+    Te = 0.9 * Rp ** (-2/3)
+    # A = np.pi * MINOR_RADIUS**2
+    # L = 2 * np.pi * MAJOR_RADIUS
+    # lnLambda = 10 # Estimate
+    # Z = 1 # Hydrogen
+    # # if (working_gas == HELIUM_GAS):
+    # #     Z = 2 # place holder value
         
-    eta = Rp * A / L
+    # eta = Rp * A / L
 
-    Te = (4 * np.sqrt(2 * np.pi)* Z* constants.elementary_charge**2* np.sqrt(constants.electron_mass)* lnLambda 
-    / ( 3*(4 * np.pi * constants.epsilon_0)**2* eta* constants.k**1.5))**(2/3)
+    # Te = (4 * np.sqrt(2 * np.pi)* Z* constants.elementary_charge**2* np.sqrt(constants.electron_mass)* lnLambda 
+    # / ( 3*(4 * np.pi * constants.epsilon_0)**2* eta* constants.k**1.5))**(2/3)
     quick_plot(DO_PLOTS,time, Te, "Temperature", ylabel="Temperature [eV]", out_path=f"{out_dir}/T.png")
     gprint(f"Average/Mean plasma temperatue {round(np.average(Te),2)}/{round(np.mean(Te),2)} [eV]\n")
 
@@ -80,6 +82,8 @@ def calc_timeconf(shot_dir, out_dir="time_results"):
     gprint(f"Calculated density is {n_e}")
 
     # 6. Calculating time conf
+    # P = Ip**2 * Rp
+    # time_conf = constants.elementary_charge * n_e * Te * VOLUME / (3 * P) * 1e6
     time_conf = constants.elementary_charge * n_e * Te * VOLUME / (3 * Uloop * Ip) *1e6
     quick_plot(DO_PLOTS,time, time_conf, "Energy time confinment", ylabel="tau [µs]", out_path=f"{out_dir}/tau.png")
     rounding = 2
