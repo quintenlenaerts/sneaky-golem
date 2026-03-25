@@ -65,8 +65,8 @@ def calc_timeconf(shot_dir, out_dir="time_results"):
     L = 2 * np.pi * MAJOR_RADIUS
     lnLambda = 10 # Estimate
     Z = 1 # Hydrogen
-    if (working_gas == HELIUM_GAS):
-        Z = 2 # place holder value
+    # if (working_gas == HELIUM_GAS):
+    #     Z = 2 # place holder value
         
     eta = Rp * A / L
 
