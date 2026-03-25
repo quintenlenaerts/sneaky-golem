@@ -89,6 +89,8 @@ def calc_timeconf(shot_dir, out_dir="time_results"):
     rounding = 2
     gprint(f"Time confinement min/max/avg/mean : {round(np.min(time_conf),rounding)}/{round(np.max(time_conf),rounding)}/{round(np.average(time_conf),rounding)}/{round(np.mean(time_conf),rounding)} [µs]")
 
+    # print(f"tripple porducucut : : ::  {}")
+
     # exporting data
     write_timeconf_meta(
         out_dir=out_dir,
@@ -140,6 +142,8 @@ def calc_density(shot, working_gas=HELIUM_GAS):
     # print(f"should be around the 600kubiekemterkes he {Vp}")
 
     p0 = shot["pre_dis_p"] * 1e-3
+    # p0 = 1
+
 
     N_e = k_a * k_e * (p0 * V0) / (T0 * constants.k)
 

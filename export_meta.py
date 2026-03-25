@@ -261,6 +261,11 @@ def write_timeconf_meta(
         f.write(f"tauE_std_us: {_fmt(tau_stats['std'])}\n")
         f.write("\n")
 
+
+        f.write("-- triple product -- \n")
+        f.write(f"?: {_fmt(tau_stats['avg'] * 1e-6 * te_stats['avg'] * float(n_e) )}\n")
+
+
         f.write("==== LATEX ====\n")
         f.write(
             "density: "

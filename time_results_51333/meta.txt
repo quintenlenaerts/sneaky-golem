@@ -76,6 +76,8 @@ tauE_avg_us: 100.552460
 tauE_mean_us: 100.552460
 tauE_std_us: 151.279758
 
+-- triple product -- 
+tauE_avg_us: 2.922356e+15
 ==== LATEX ====
 density: $n_e = 5.053 \times 10^{18}\,\mathrm{m^{-3}}$
 temperature: $T_e = 5.751\,\mathrm{eV}$

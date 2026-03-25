@@ -103,11 +103,11 @@ def calc_plasma_current(shot_dir: str | Path, out_dir: str | Path | None = None)
     csv_path = out_dir / "Ip.csv"
     df_out.loc[:, ["time_ms", "Ip"]].to_csv(csv_path, index=False)
 
-    plasma_csv_path = out_dir / "Ip_plasma_only.csv"
-    df_plasma.loc[:, ["time_ms", "Ip"]].to_csv(plasma_csv_path, index=False)
+    # plasma_csv_path = out_dir / "Ip_plasma_only.csv"
+    # df_plasma.loc[:, ["time_ms", "Ip"]].to_csv(plasma_csv_path, index=False)
 
     print(f"Saved full plasma current CSV to: {csv_path}")
-    print(f"Saved plasma-window current CSV to: {plasma_csv_path}")
+    # print(f"Saved plasma-window current CSV to: {plasma_csv_path}")
     print(
         "Ip summary during plasma [A]: "
         f"min={df_plasma['Ip'].min():.3f}, "
