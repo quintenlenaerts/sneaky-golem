@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 
 import os
 import numpy as np
+from golem import gprint
 
 tue_red = "#C71918"
 red_compl = "#18C6C7"
@@ -266,6 +267,8 @@ def write_timeconf_meta(
         # f.write(f"?: {_fmt(tau_stats['avg'] * 1e-6 * te_stats['avg'] * float(n_e) )}\n")
         triple = float(n_e) * te_stats['avg'] * 1e-3 * tau_stats['avg'] * 1e-6
         f.write(f"triple_product_keV_s_m^-3: {_fmt(triple)}\n")
+        gprint(f"triple_product_keV_s_m^-3: {_fmt(triple)}\n")
+        
 
 
         f.write("==== LATEX ====\n")

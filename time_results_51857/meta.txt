@@ -22,7 +22,7 @@ minor_radius_m: 0.100000
 volume_m3: 0.078957
 
 ==== RESULTS ====
-density_m^-3: 3.302399e+18
+density_m^-3: 3.291391e+18
 
 ==== SUMMARY TABLE ====
 quantity               min             max            mean             avg
@@ -30,7 +30,7 @@ quantity               min             max            mean             avg
 Ip [A]          123.967975    1.141116e+04     6296.120453     6296.120453
 Uloop [V]         5.032031       11.304688        6.103173        6.103173
 Te [eV]           4.766301      148.930181       91.720355       91.720355
-tau_E [us]       26.329866       55.203269       37.306923       37.306923
+tau_E [us]       26.242100       55.019258       37.182567       37.182567
 
 -- time [ms] --
 
@@ -70,18 +70,18 @@ Te_mean_eV: 91.720355
 Te_std_eV: 38.337555
 
 -- tau_E [us] --
-tauE_min_us: 26.329866
-tauE_max_us: 55.203269
-tauE_avg_us: 37.306923
-tauE_mean_us: 37.306923
-tauE_std_us: 5.523175
+tauE_min_us: 26.242100
+tauE_max_us: 55.019258
+tauE_avg_us: 37.182567
+tauE_mean_us: 37.182567
+tauE_std_us: 5.504764
 
 -- triple product -- 
-triple_product_keV_s_m^-3: 1.130016e+13
+triple_product_keV_s_m^-3: 1.122495e+13
 ==== LATEX ====
-density: $n_e = 3.302 \times 10^{18}\,\mathrm{m^{-3}}$
+density: $n_e = 3.291 \times 10^{18}\,\mathrm{m^{-3}}$
 temperature: $T_e = 91.720\,\mathrm{eV}$
-time_confinement: $\tau_E = 37.307\,\mathrm{\mu s}$
+time_confinement: $\tau_E = 37.183\,\mathrm{\mu s}$
 
 latex_table:
 \begin{table}[h]
@@ -93,7 +93,7 @@ Quantity & Min & Max & Mean & Avg \\
 $I_p$ [A] & 123.967975 & 1.141116e+04 & 6296.120453 & 6296.120453 \\
 $U_{loop}$ [V] & 5.032031 & 11.304688 & 6.103173 & 6.103173 \\
 $T_e$ [eV] & 4.766301 & 148.930181 & 91.720355 & 91.720355 \\
-$\tau_E$ [$\mu$s] & 26.329866 & 55.203269 & 37.306923 & 37.306923 \\
+$\tau_E$ [$\mu$s] & 26.242100 & 55.019258 & 37.182567 & 37.182567 \\
 \hline
 \end{tabular}
 \caption{Summary of plasma parameters}

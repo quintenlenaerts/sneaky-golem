@@ -1,0 +1,100 @@
+==== SETTINGS ====
+shot_num: 51863
+shot_dir: shot_51863
+out_dir: time_results_51863
+working_gas: helium
+working_gas_code: 0
+time_mask_padding: 0.150000
+drift_correction: True
+do_plots: True
+
+==== DETECTED PLASMA WINDOW ====
+valid_plasma: True
+start_index: 4430
+end_index: 20542
+start_time_ms: 3.431244
+end_time_ms: 19.543244
+window_duration_ms: 16.112000
+
+==== CONSTANTS ====
+major_radius_m: 0.400000
+minor_radius_m: 0.100000
+volume_m3: 0.078957
+
+==== RESULTS ====
+density_m^-3: 2.869417e+18
+
+==== SUMMARY TABLE ====
+quantity               min             max            mean             avg
+----------------------------------------------------------------------------
+Ip [A]          140.098153    1.170659e+04     6514.921343     6514.921343
+Uloop [V]         3.478906       11.643750        5.917761        5.917761
+Te [eV]           5.197914      156.802861       95.884924       95.884924
+tau_E [us]       19.664842       80.070556       33.884089       33.884089
+
+-- time [ms] --
+
+-- time [ms] --
+time_min_ms: 3.431244
+time_max_ms: 19.543244
+time_avg_ms: 11.487244
+time_mean_ms: 11.487244
+time_std_ms: 4.651422
+
+-- Ip [A] --
+Ip_min_A: 140.098153
+Ip_max_A: 1.170659e+04
+Ip_avg_A: 6514.921343
+Ip_mean_A: 6514.921343
+Ip_std_A: 3379.738031
+
+-- Uloop [V] --
+Uloop_min_V: 3.478906
+Uloop_max_V: 11.643750
+Uloop_avg_V: 5.917761
+Uloop_mean_V: 5.917761
+Uloop_std_V: 1.174984
+
+-- Rp [ohm] --
+Rp_min_ohm: 4.348433e-04
+Rp_max_ohm: 0.072048
+Rp_avg_ohm: 0.002759
+Rp_mean_ohm: 0.002759
+Rp_std_ohm: 0.006976
+
+-- Te [eV] --
+Te_min_eV: 5.197914
+Te_max_eV: 156.802861
+Te_avg_eV: 95.884924
+Te_mean_eV: 95.884924
+Te_std_eV: 39.923769
+
+-- tau_E [us] --
+tauE_min_us: 19.664842
+tauE_max_us: 80.070556
+tauE_avg_us: 33.884089
+tauE_mean_us: 33.884089
+tauE_std_us: 5.538338
+
+-- triple product -- 
+triple_product_keV_s_m^-3: 9.322660e+12
+==== LATEX ====
+density: $n_e = 2.869 \times 10^{18}\,\mathrm{m^{-3}}$
+temperature: $T_e = 95.885\,\mathrm{eV}$
+time_confinement: $\tau_E = 33.884\,\mathrm{\mu s}$
+
+latex_table:
+\begin{table}[h]
+\centering
+\begin{tabular}{lcccc}
+\hline
+Quantity & Min & Max & Mean & Avg \\
+\hline
+$I_p$ [A] & 140.098153 & 1.170659e+04 & 6514.921343 & 6514.921343 \\
+$U_{loop}$ [V] & 3.478906 & 11.643750 & 5.917761 & 5.917761 \\
+$T_e$ [eV] & 5.197914 & 156.802861 & 95.884924 & 95.884924 \\
+$\tau_E$ [$\mu$s] & 19.664842 & 80.070556 & 33.884089 & 33.884089 \\
+\hline
+\end{tabular}
+\caption{Summary of plasma parameters}
+\end{table}

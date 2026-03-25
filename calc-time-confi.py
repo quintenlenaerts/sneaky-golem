@@ -18,6 +18,7 @@ VOLUME = 2 * np.pi ** 2 * MAJOR_RADIUS * MINOR_RADIUS ** 2
 
 # COMPUTATION OPTIONS
 TIME_MASK_PADDING = 0.15
+# TIME_MASK_PADDING = 0.2
 DO_PLOTS = True
 DRIFT_CORRECTION = True
 
@@ -30,10 +31,13 @@ def calc_timeconf(shot_dir, out_dir="time_results"):
     shot = ShotData(shot_dir)
 
     # 1. check if plasma succesfull & extract workable range 
-    p_valid, p_start, p_end = validate_plasma(shot)
-    if not p_valid:
+    plasma_dat = validate_plasma(shot)
+    
+    if not plasma_dat:
         gsad("Plasma not valid. Aborting.")
         return
+    
+    p_valid, p_start, p_end = plasma_dat
     
     time = shot["U_loop.csv"].iloc[:,0]
     
@@ -150,6 +154,7 @@ def calc_density(shot, working_gas=HELIUM_GAS):
     p0 = 9 * 1e-3
     if shot["pre_dis_p"] == None:
         print("SHOT has no pres ")
+    else:
         p0 = shot["pre_dis_P"] * 1e-3
     
 
