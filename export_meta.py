@@ -263,7 +263,9 @@ def write_timeconf_meta(
 
 
         f.write("-- triple product -- \n")
-        f.write(f"?: {_fmt(tau_stats['avg'] * 1e-6 * te_stats['avg'] * float(n_e) )}\n")
+        # f.write(f"?: {_fmt(tau_stats['avg'] * 1e-6 * te_stats['avg'] * float(n_e) )}\n")
+        triple = float(n_e) * te_stats['avg'] * 1e-3 * tau_stats['avg'] * 1e-6
+        f.write(f"triple_product_keV_s_m^-3: {_fmt(triple)}\n")
 
 
         f.write("==== LATEX ====\n")

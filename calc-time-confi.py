@@ -12,11 +12,12 @@ from golem import *
 from export_meta import quick_plot, write_timeconf_meta
 
 MAJOR_RADIUS = 0.4
-MINOR_RADIUS = 0.085
+MINOR_RADIUS = 0.1
+# MINOR_RADIUS = 0.085
 VOLUME = 2 * np.pi ** 2 * MAJOR_RADIUS * MINOR_RADIUS ** 2
 
 # COMPUTATION OPTIONS
-TIME_MASK_PADDING = 0.12
+TIME_MASK_PADDING = 0.15
 DO_PLOTS = True
 DRIFT_CORRECTION = True
 
@@ -89,6 +90,10 @@ def calc_timeconf(shot_dir, out_dir="time_results"):
     rounding = 2
     gprint(f"Time confinement min/max/avg/mean : {round(np.min(time_conf),rounding)}/{round(np.max(time_conf),rounding)}/{round(np.average(time_conf),rounding)}/{round(np.mean(time_conf),rounding)} [µs]")
 
+
+    triple = n_e * Te * time_conf * 1e-9
+    quick_plot(DO_PLOTS,time, time_conf, "Tirple", ylabel="? [µs]", out_path=f"{out_dir}/triple.png")
+
     # print(f"tripple porducucut : : ::  {}")
 
     # exporting data
@@ -141,8 +146,16 @@ def calc_density(shot, working_gas=HELIUM_GAS):
     V0 = 60e-3
     # print(f"should be around the 600kubiekemterkes he {Vp}")
 
-    p0 = shot["pre_dis_p"] * 1e-3
-    # p0 = 1
+    # p0 = shot["pre_dis_p"] * 1e-3
+    p0 = 9 * 1e-3
+    if shot["pre_dis_p"] == None:
+        print("SHOT has no pres ")
+        p0 = shot["pre_dis_P"] * 1e-3
+    
+
+    gprint(f"used discharge is {p0} Pa")
+    # p0 = 0.13 * 1e-3 
+    # p0 = 10 * 1e-3
 
 
     N_e = k_a * k_e * (p0 * V0) / (T0 * constants.k)
